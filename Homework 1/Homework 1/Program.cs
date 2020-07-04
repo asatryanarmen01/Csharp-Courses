@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Homework_1
 {
@@ -12,35 +11,40 @@ namespace Homework_1
                 try
                 {
                     Console.WriteLine("Please enter the mathematical expression.");
-                    Console.WriteLine("E.g. 1+2*(2)+3/3+4*(-4)-5");
+                    Console.WriteLine("Write 'exit' or press ESC key to close the application.");
+                    Console.WriteLine("E.g. 1+2*(2)+3/3+4*(-4)-5 \n");
+                    
                     string operationA = Console.ReadLine();
+
                     var operationB = new System.Data.DataTable().Compute(operationA, "");
-                    Console.WriteLine("Answer: " + operationB);
-                    break;
-                }
-                catch (Exception Ex)
-                {
-                    Console.WriteLine("Not a math expression! Try again");
+                    
+                    Console.WriteLine("Answer: " + operationB + "\n");
+                    
+                    // Close Application
+                    if (operationA == "exit")
+                    {
+                        break; // or return
+                    } 
+
+                    var key = Console.ReadKey();
+                    if (key.Key == ConsoleKey.Escape)
+                    {
+                        Environment.Exit(0);
+                    }
+                    else
+                    {
+                        break;
+                    }
+
                     continue;
-                    //throw;
-                    //New Comment
+
                 }
-            }
-
-
-            //int temp;
-            //bool isNumber = Int32.TryParse(operationA, out temp);
-
-            //public static bool IsNumeric(object Expression);
-
-            //if (isNumber)
-            //{
-
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Please enter Mathematical Expression");
-            //}           
+                catch (Exception)
+                {
+                    Console.WriteLine("Answer: Not a math expression! Try again" + "\n");
+                    continue;
+                }
+            }           
         }
 	}
 }
