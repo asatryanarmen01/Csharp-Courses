@@ -6,45 +6,88 @@ namespace Homework_1
     {
         static void Main(string[] args)
         {
-            while (true) 
+            Console.Title = "Homework 1 - Armen Asatryan";
+
+            Console.WriteLine("Please input 1 or 2 to choose solution");
+            var input1 = Console.ReadLine();
+            int option = Convert.ToInt32(input1);
+
+            switch (option)
             {
-                try
-                {
-                    Console.WriteLine("Please enter the mathematical expression.");
-                    Console.WriteLine("Write 'exit' or press ESC key to close the application.");
-                    Console.WriteLine("E.g. 1+2*(2)+3/3+4*(-4)-5 \n");
-                    
-                    string operationA = Console.ReadLine();
-
-                    var operationB = new System.Data.DataTable().Compute(operationA, "");
-                    
-                    Console.WriteLine("Answer: " + operationB + "\n");
-                    
-                    // Close Application
-                    if (operationA == "exit")
+                case 1:
+                    while (true)
                     {
-                        break; // or return
-                    } 
+                        try
+                        {
+                            Console.WriteLine("Please enter a mathematical expression.");
+                            Console.WriteLine("Write 'exit' or press ESC key to close the application.");
+                            Console.WriteLine("Use + - * / operations." + "\n");
 
-                    var key = Console.ReadKey();
-                    if (key.Key == ConsoleKey.Escape)
-                    {
-                        Environment.Exit(0);
+                            string input = Console.ReadLine();
+
+                            // Close Application with 'exit' command
+                            if (input == "exit")
+                            {
+                                break; // or return;
+                            }
+
+                            var calculateMathExpression = new System.Data.DataTable().Compute(input, "");
+
+                            Console.WriteLine("Answer: " + calculateMathExpression + "\n");
+
+                            //// Close Application with ESC button
+                            //if (Console.ReadKey().Key == ConsoleKey.Escape)
+                            //{
+                            //    Environment.Exit(0);
+                            //}
+                            //else
+                            //{
+                            //    continue;
+                            //}
+
+                            continue;
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Answer: Not a math expression! Try again" + "\n");
+                            continue;
+                        }
                     }
-                    else
+                    break;
+                case 2:
+                    while (true)
                     {
-                        break;
+                        try
+                        {
+                            Console.WriteLine("Please enter a mathematical expression.");
+                            Console.WriteLine("Write 'exit' or press ESC key to close the application.");
+                            Console.WriteLine("Use + - * / operations." + "\n");
+
+                            string input = Console.ReadLine();
+
+                            // Close Application with 'exit' command
+                            if (input == "exit")
+                            {
+                                break; // or return;
+                            }
+
+                            var calculateMathExpression = new System.Data.DataTable().Compute(input, "");
+
+                            Console.WriteLine("Answer: " + calculateMathExpression + "\n");
+
+                            continue;
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Answer: Not a math expression! Try again" + "\n");
+                            continue;
+                        }
                     }
-
-                    continue;
-
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Answer: Not a math expression! Try again" + "\n");
-                    continue;
-                }
-            }           
+                    break;
+                default:
+                    break;
+            }
+                    
         }
 	}
 }
