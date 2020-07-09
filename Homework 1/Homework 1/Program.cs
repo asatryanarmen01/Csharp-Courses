@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic.CompilerServices;
-using System;
+﻿using System;
 
 namespace Homework_1
 {
@@ -34,12 +33,13 @@ namespace Homework_1
                                 break; // or return;
                             }
 
-                            // Close Application with ESC button
-
                             var calculateMathExpression = new System.Data.DataTable().Compute(input, "").ToString();
                             
                             Console.WriteLine(input + " = " + calculateMathExpression + "\n");
                             Console.WriteLine("Try again or exit application" + "\n");
+
+
+                            // Close Application with ESC button
                             if (Console.ReadKey().Key == ConsoleKey.Escape)
                             {
                                 Environment.Exit(0);
@@ -69,8 +69,6 @@ namespace Homework_1
 
                         while (true)
                         {
-
-                            //Console.WriteLine("\n"+x);
 
                             double answer;
                             string op = "";
@@ -113,7 +111,6 @@ namespace Homework_1
 
                                 continue;
                             }
-                            //continue;
                         }
                     }
                     
