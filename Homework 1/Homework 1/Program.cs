@@ -117,14 +117,6 @@ namespace Homework_1
                         }
                     }
                     
-                case 3:
-                    {
-
-                        Console.WriteLine("Case 3");
-                    }
-                    break;
-                default:
-                    break;
             }
                     
         }
