@@ -8,6 +8,10 @@ class NullOrEmptyException : Exception
     {
 
     }
+    public NullOrEmptyException()
+    {
+
+    }
 }
 
 class IncludesBracketsException : Exception
@@ -16,7 +20,10 @@ class IncludesBracketsException : Exception
     {
 
     }
+    public IncludesBracketsException()
+    {
 
+    }
 }
 
 class MultipleJointOperatorsException : Exception
@@ -25,7 +32,10 @@ class MultipleJointOperatorsException : Exception
     {
 
     }
+    public MultipleJointOperatorsException()
+    {
 
+    }
 }
 
 class InputStartsWithNonDigitException : Exception
@@ -34,6 +44,9 @@ class InputStartsWithNonDigitException : Exception
     {
 
     }
+    public InputStartsWithNonDigitException()
+    {
 
+    }
 }
 

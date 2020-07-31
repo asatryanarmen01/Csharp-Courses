@@ -103,23 +103,23 @@ public class Calculator
         }
         catch (NullOrEmptyException ex)
         {
-            Console.WriteLine(ex.Message + newCalcMsg);
+            throw ex;
         }
         catch (IncludesBracketsException ex)
         {
-            Console.WriteLine(ex.Message + newCalcMsg);
+            throw ex;
         }
         catch (InputStartsWithNonDigitException ex)
         {
-            Console.WriteLine(ex.Message + newCalcMsg);
+            throw ex;
         }
         catch (MultipleJointOperatorsException ex)
         {
-            Console.WriteLine(ex.Message + newCalcMsg);
+            throw ex;
         }
         catch (Exception ex)
         {
-            Console.WriteLine(ex.Message + newCalcMsg);
+            throw ex;
         }
     }
 }
