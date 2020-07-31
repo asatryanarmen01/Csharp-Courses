@@ -1,66 +1,69 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace Calculator
+public class Validator
 {
-    public class Validator
-    {
-        private string Input { get; set; }
-        public bool IsValid { get; set; } = true;
-        public string ErrorMessage { get; set; }
+    private string Input { get; set; }
+    public bool IsValid { get; set; } = true;
+    public string ErrorMessage { get; set; }
 
-        public Validator(string input)
+    public Validator(string input)
+    {
+        this.Input = input;
+    }
+
+    public void Validate(string input)
+    {
+
+        if (String.IsNullOrEmpty(this.Input))
         {
-            this.Input = input;
-            this.Validate();
+            throw new NullOrEmptyException(this.Input);
         }
 
-        public void Validate()
+        if (this.Input == "exit")
         {
-            try
-            {
-                if (this.Input.Contains('(') || this.Input.Contains(')'))
-                {
-                    this.ErrorMessage = "Input should not contain parenthesis.";
-                    this.IsValid = false;
-                };
+            Environment.Exit(0);
+        }
 
-                bool tempValid = true;
-                for (int i = 0; i < this.Input.Length; i++)
+        
+
+        if (this.Input.Contains('(') || this.Input.Contains(')'))
+        {
+            this.IsValid = false;
+            throw new IncludesBracketsException(this.Input);
+        };
+
+        bool tempValid = true;
+        for (int i = 0; i < this.Input.Length; i++)
+        {
+            if (i == 0)
+            {
+                if (!char.IsDigit(this.Input[0]))
                 {
-                    
-                    switch (this.Input[i])
-                    {
-                        case '*':
-                        case '/':
-                        case '+':
-                        case '-':
-                            {
-                                if (!char.IsDigit(this.Input[i - 1]) || !char.IsDigit(this.Input[i + 1]))
-                                {
-                                    this.IsValid = false;
-                                    tempValid = false;
-                                }
-                                this.ErrorMessage = "Incorrect math expression, operator is followd by other symbol.";
-                                break;
-                            }
-                        
-                    }
-                    if (!tempValid)
-                    {
-                        break;
-                    }
+                    throw new InputStartsWithNonDigitException(this.Input);
                 }
             }
-            catch (Exception Ex)
-            {
-                this.ErrorMessage = Ex.Message;
-                this.IsValid = false;
-            }
 
-            //this.IsValid = true;
+            switch (this.Input[i])
+            {
+                case '*':
+                case '/':
+                case '+':
+                case '-':
+                    {
+                        if (!char.IsDigit(this.Input[i - 1]) || !char.IsDigit(this.Input[i + 1]))
+                        {
+                            this.IsValid = false;
+                            tempValid = false;
+                            throw new MultipleJointOperatorsException(this.Input);
+                        }
+                        break;
+                    }
+            }
+            if (!tempValid)
+            {
+                break;
+            }
         }
     }
 }
+
