@@ -70,7 +70,7 @@ namespace Lesson5.Exercise
             // 6. The names of lecturers which teach the discipline which has the maximum number of students.
             var biggestDisciplineLecturers = disciplines.Where(discipline => discipline.Name == biggestDisciplineOp1.Name)
                 .SelectMany(discipline => discipline.GetLecturers())
-                .Select(g => new { g.Name, g.Surname });
+                .Select(g => (g.Name, g.Surname));
             
             Console.WriteLine("6. {0} is the biggest discipline and the lecturers are:", biggestDisciplineOp1.Name);
             foreach (var lct in biggestDisciplineLecturers)
@@ -87,12 +87,17 @@ namespace Lesson5.Exercise
                                                .FirstOrDefault();
 
             // 8. The pairs of student name and discipline name(students are assigned to discipline).
-            var pairsStudentDiscipline = disciplines.SelectMany(discipline => discipline.GetStudents().Select(g => new { g.Name, g.Surname})).Distinct();
+            var Discipline2 = disciplines.Where(discipline => discipline.GetStudents().Count() > 0);
 
             Console.WriteLine("8. Student-Discipline pairs.");
-            foreach (var dsc in pairsStudentDiscipline)
+            foreach (var dsc in Discipline2)
             {
-                Console.WriteLine(" - {0} {1} - {2}", dsc.Name, dsc.Surname);
+                var studentsList = disciplines.Where(discipline => discipline.Name == dsc.Name).SelectMany(discipline => discipline.GetStudents().Select(g => (g.Name, g.Surname))).Distinct().ToList();
+                foreach (var std in studentsList)
+                {
+                    Console.WriteLine("{0} - {1} {2}", dsc.Name, std.Name, std.Surname);
+                }
+                                 
             }
             Console.WriteLine();
 
